@@ -14,6 +14,7 @@ class QuickUnion: NSObject {
   
   var objects: [Int]
   
+  // N array accesses
   init(withObjects count: Int) {
     self.numberOfObjects = count
     self.objects = [Int]()
@@ -22,6 +23,7 @@ class QuickUnion: NSObject {
     }
   }
   
+  // depth of n array accesses
   private func root(n: Int) -> Int {
     var x = n
     while x != objects[x] {
@@ -30,9 +32,16 @@ class QuickUnion: NSObject {
     return x
   }
   
+  // depth of p and q array accesses
   func connected(p: Int, q: Int) -> Bool {
-    return objects[p] == objects[q]
+    return root(p) == root(q)
   }
 
+  // depth of p and q array accesses
+  func union(p: Int, q: Int) {
+    let rootP = root(p)
+    let rootQ = root(q)
+    objects[rootP] = rootQ
+  }
 
 }
